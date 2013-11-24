@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Code Sample Using Backbone - Joe McCombs</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
+	<link rel="stylesheet" type="text/css" href="public/css/site.css" />
+
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
+	
+	<script type="text/javascript" src="public/js/site.js"></script>
+</head>
+<body>
+
+<script id="customer-modal" type="text/template">
+	<div class="pnl-form">
+		<h2>Editing: <%= first %> <%= last %></h2>
+		<div class="error"></div>
+		<dl>
+			<dt>Email</dt>
+			<dd><input type="text" id="el-email" maxlength="50" value="<%= email %>" /></dd>
+			
+			<dt>First Name</dt>
+			<dd><input type="text" id="el-first" maxlength="30" value="<%= first %>" required="required" /></dd>
+			
+			<dt>Last Name</dt>
+			<dd><input type="text" id="el-last" maxlength="30" value="<%= last %>" required="required" /></dd>
+			
+			<dt>Prefix</dt>
+			<dd><input type="text" id="el-prefix" maxlength="6" value="<%= prefix %>" /></dd>
+			
+			<dt>Phone</dt>
+			<dd><input type="text" id="el-phone" maxlength="30" value="<%= phone %>" /></dd>
+			
+			<dt>Fax</dt>
+			<dd><input type="text" id="el-fax" maxlength="30" value="<%= fax %>" /></dd>
+			
+			<dt>Title</dt>
+			<dd><input type="text" id="el-title" maxlength="20" value="<%= title %>" /></dd>
+			
+			<dt>Company</dt>
+			<dd><input type="text" id="el-company" maxlength="40" value="<%= company %>" /></dd>
+			
+			<dt>Url</dt>
+			<dd><input type="text" id="el-url" maxlength="60" value="<%= url %>" /></dd>
+		</dl>
+		<dl>
+			<dt>&nbsp;</dt>
+			<dd>
+				<button class="btn-save">Save Contact</button>
+				<button class="btn-delete gray">Delete</button>
+				<button class="btn-cancel gray">Cancel</button>
+			</dd>
+		</dl>
+		<br style="clear: both"/>
+	</div>
+</script>
+
+<script id="customer-table" type="text/template">
+	<thead>
+		<tr>
+			<th><a colmap="email">Email</a></th>
+			<th><a colmap="first">First Name</a></th>
+			<th><a colmap="last">Last Name</a></th>
+			<th><a colmap="prefix">Prefix</a></th>
+			<th><a colmap="phone">Phone</a></th>
+			<th><a colmap="fax">Fax</a></th>
+			<th><a colmap="title">Title</a></th>
+			<th><a colmap="company">Company</a></th>
+		</tr>
+	</thead>
+	<tbody></tbody>
+</script>
+
+<script id="customer-row" type="text/template">
+	<td><%= email %></td>
+	<td><%= first %></td>
+	<td><%= last %></td>
+	<td><%= prefix %></td>
+	<td><%= phone %></td>
+	<td><%= fax %></td>
+	<td><%= title %></td>
+	<td><a href="http://<%= url %>" target="_blank"><%= company %></a></td>
+</script>
+
+<script id="customer-paginator" type="text/template">
+	Total records: <em></em> 
+	<span>
+		Jump to page: 
+		<select></select>
+	</span>
+</script>
+
+
+<div id="body-wrapper">
+	<h1>
+		UI Code Sample
+		<em>by Joe McCombs</em>
+	</h1>
+	
+	<div class="block-content">
+		<h2>Contact List</h2>
+		
+		<button class="btn-new">Add New Contact</button>
+		
+		<div id="grid-customers"></div>
+		
+		<button class="btn-new">Add New Contact</button>
+	</div>
+</div>
+
+<div id="modal"></div>
+
+
+</body>
+</html>
