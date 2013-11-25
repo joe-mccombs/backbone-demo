@@ -23,6 +23,11 @@ function error_handler($errno, $errstr, $errfile, $errline)
 set_error_handler('error_handler');
 
 
+function filter(&$value) {
+	$value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+}
+
+
 /**
  * Every action requires a database connection, so initialize now.
  *
@@ -130,6 +135,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 		$stmt = $dbh->prepare($sql);
 		$stmt->execute();
 		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		array_walk_recursive($rows, 'filter');
 				
 		$rowCount = $dbh->query('SELECT FOUND_ROWS()'); 
 		$rowCount = (int)$rowCount->fetchColumn(); 
